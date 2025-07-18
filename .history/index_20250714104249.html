@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SEO Meta Tags -->
+    <title>Tiêu đề trang web của bạn | Từ khóa chính</title>
+    <meta name="description"
+        content="Mô tả ngắn gọn về trang web của bạn trong khoảng 150-160 ký tự. Hãy đảm bảo nó hấp dẫn và chứa từ khóa chính.">
+    <meta name="keywords" content="từ khóa 1, từ khóa 2, từ khóa 3">
+    <meta name="author" content="Tên công ty/website của bạn">
+
+    <!-- Open Graph Meta Tags cho Social Media -->
+    <meta property="og:title" content="Tiêu đề trang web của bạn">
+    <meta property="og:description" content="Mô tả ngắn gọn về trang web của bạn">
+    <meta property="og:image" content="URL của ảnh đại diện">
+    <meta property="og:url" content="URL của trang web">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Tiêu đề trang web của bạn">
+    <meta name="twitter:description" content="Mô tả ngắn gọn về trang web của bạn">
+    <meta name="twitter:image" content="URL của ảnh đại diện">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="URL chính thức của trang">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <!-- Menu chính -->
+            <ul>
+                <li><a href="#home">Trang chủ</a></li>
+                <li><a href="#about">Về chúng tôi</a></li>
+                <li><a href="#services">Dịch vụ</a></li>
+                <li><a href="#contact">Liên hệ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <main>
+        <section id="hero">
+            <h1>Tiêu đề chính của trang</h1>
+            <p>Mô tả ngắn gọn về giá trị cốt lõi của bạn</p>
+            <button>Hành động chính</button>
+        </section>
+
+        <!-- About Section -->
+        <section id="about">
+            <h2>Về chúng tôi</h2>
+            <article>
+                <p>Nội dung về công ty/dịch vụ của bạn</p>
+            </article>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services">
+            <h2>Dịch vụ của chúng tôi</h2>
+            <div class="service-grid">
+                <!-- Service Items -->
+                <article class="service-item">
+                    <h3>Dịch vụ 1</h3>
+                    <p>Mô tả dịch vụ</p>
+                </article>
+                <!-- Thêm các service-item khác -->
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section id="testimonials">
+            <h2>Khách hàng nói gì về chúng tôi</h2>
+            <div class="testimonial-grid">
+                <!-- Testimonial Items -->
+                <blockquote>
+                    <p>Đánh giá của khách hàng</p>
+                    <cite>Tên khách hàng</cite>
+                </blockquote>
+            </div>
+        </section>
+
+        <!-- Contact Form -->
+        <section id="contact">
+            <h2>Liên hệ với chúng tôi</h2>
+            <form>
+                <label for="name">Họ tên:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Tin nhắn:</label>
+                <textarea id="message" name="message" required></textarea>
+
+                <button type="submit">Gửi tin nhắn</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="contact-info">
+                <h3>Thông tin liên hệ</h3>
+                <address>
+                    <p>Địa chỉ: Địa chỉ của bạn</p>
+                    <p>Email: email@domain.com</p>
+                    <p>Điện thoại: (123) 456-7890</p>
+                </address>
+            </div>
+            <div class="social-links">
+                <!-- Social Media Links -->
+                <a href="#" aria-label="Facebook">Facebook</a>
+                <a href="#" aria-label="Twitter">Twitter</a>
+                <a href="#" aria-label="LinkedIn">LinkedIn</a>
+            </div>
+        </div>
+        <p>&copy; 2024 Tên công ty của bạn. All rights reserved.</p>
+    </footer>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Tên công ty của bạn",
+        "url": "URL của website",
+        "logo": "URL của logo",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "Số điện thoại",
+            "contactType": "customer service"
+        },
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Địa chỉ của bạn",
+            "addressLocality": "Thành phố",
+            "addressRegion": "Tỉnh/Thành phố",
+            "postalCode": "Mã bưu điện",
+            "addressCountry": "VN"
+        }
+    }
+    </script>
+
+    <!-- JavaScript -->
+    <script src="main.js" defer></script>
+</body>
+
+</html>
