@@ -171,7 +171,7 @@ const products = [
     {
         id: 29,
         name: "Dầu Gội Phủ Bạc",
-        image: "images/sanpham/daugoiphubac/1.jpg",
+        image: "images/sanpham/daugoipubac/1.jpg",
         category: "Chăm sóc cá nhân"
     },
     {
@@ -297,14 +297,6 @@ function showProductModal(productId) {
             if (e.target.id === 'productModal') {
                 document.getElementById('productModal').remove();
             }
-        };
-
-        // Xử lý click nút Liên Hệ Tư Vấn - chuyển đến Zalo
-        document.querySelector('.contact-btn').onclick = function () {
-            // Thay thế số điện thoại Zalo của bạn ở đây
-            const zaloPhone = '0123456789'; // Thay bằng số Zalo thực tế
-            const zaloUrl = `https://zalo.me/${zaloPhone}`;
-            window.open(zaloUrl, '_blank');
         };
     }
 }
