@@ -182,84 +182,123 @@ const products = [
     }
 ];
 
-// Function tạo HTML cho sản phẩm
-function createProductSlide(product) {
+// Function tạo HTML cho sản phẩm trong grid
+function createProductCard(product) {
     return `
-        <div class="swiper-slide">
-            <div class="product-item" data-product-id="${product.id}" style="cursor: pointer;">
+        <div class="product-card" data-product-id="${product.id}" data-category="${product.category}">
+            <div class="product-image">
                 <img src="${product.image}" alt="${product.name}">
                 <div class="product-overlay">
-                    <span class="product-name">${product.name}</span>
-                    <span class="product-category">${product.category}</span>
+                    <button class="view-details-btn">Xem Chi Tiết</button>
                 </div>
+            </div>
+            <div class="product-info">
+                <h3 class="product-name">${product.name}</h3>
+                <span class="product-category">${product.category}</span>
             </div>
         </div>
     `;
 }
 
 // Function render tất cả sản phẩm
-function renderProducts() {
-    const productSwiperWrapper = document.querySelector('.product-swiper .swiper-wrapper');
-    if (productSwiperWrapper) {
-        const productHTML = products.map(product => createProductSlide(product)).join('');
-        productSwiperWrapper.innerHTML = productHTML;
+function renderAllProducts() {
+    const productsGrid = document.getElementById('productsGrid');
+    if (productsGrid) {
+        const productsHTML = products.map(product => createProductCard(product)).join('');
+        productsGrid.innerHTML = productsHTML;
     }
 }
 
 // Function render sản phẩm theo category
 function renderProductsByCategory(category) {
-    const filteredProducts = products.filter(product => product.category === category);
-    const productSwiperWrapper = document.querySelector('.product-swiper .swiper-wrapper');
-    if (productSwiperWrapper) {
-        const productHTML = filteredProducts.map(product => createProductSlide(product)).join('');
-        productSwiperWrapper.innerHTML = productHTML;
+    const productsGrid = document.getElementById('productsGrid');
+    if (productsGrid) {
+        let filteredProducts;
+        if (category === 'all') {
+            filteredProducts = products;
+        } else {
+            filteredProducts = products.filter(product => product.category === category);
+        }
+        const productsHTML = filteredProducts.map(product => createProductCard(product)).join('');
+        productsGrid.innerHTML = productsHTML;
     }
 }
 
-// Khởi tạo product swiper
-let productSwiper;
+// Function xử lý click filter
+function handleFilterClick(e) {
+    if (e.target.classList.contains('filter-btn')) {
+        // Remove active class từ tất cả buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
 
-function initProductSwiper() {
-    productSwiper = new Swiper('.product-swiper', {
-        slidesPerView: 'auto',
-        spaceBetween: 20,
-        loop: true,
-        autoplay: {
-            delay: 3000,
-            disableOnInteraction: false,
-        },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-        // Xóa phần pagination này
-        // pagination: {
-        //     el: '.swiper-pagination',
-        //     clickable: true,
-        // },
-        breakpoints: {
-            768: {
-                slidesPerView: 2,
-            },
-            1024: {
-                slidesPerView: 3,
-            },
-            1200: {
-                slidesPerView: 4,
-            }
-        }
-    });
+        // Add active class cho button được click
+        e.target.classList.add('active');
+
+        // Get category
+        const category = e.target.dataset.category;
+
+        // Render sản phẩm theo category
+        renderProductsByCategory(category);
+    }
 }
 
-// Animation for fade-in-up
-function handleFadeInUp() {
-    const fadeEls = document.querySelectorAll('.fade-in-up');
-    fadeEls.forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 60) {
-            el.classList.add('visible');
-        }
-    });
+// Function xử lý click vào sản phẩm
+function handleProductClick(e) {
+    if (e.target.closest('.product-card')) {
+        const productCard = e.target.closest('.product-card');
+        const productId = productCard.dataset.productId;
+
+        // Có thể chuyển đến trang chi tiết sản phẩm
+        // window.location.href = `product-detail.html?id=${productId}`;
+
+        // Hoặc hiển thị modal chi tiết sản phẩm
+        showProductModal(productId);
+    }
+}
+
+// Function hiển thị modal chi tiết sản phẩm
+function showProductModal(productId) {
+    const product = products.find(p => p.id == productId);
+    if (product) {
+        // Tạo modal HTML
+        const modalHTML = `
+            <div class="product-modal" id="productModal">
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <div class="modal-body">
+                        <div class="product-image">
+                            <img src="${product.image}" alt="${product.name}">
+                        </div>
+                        <div class="product-details">
+                            <h2>${product.name}</h2>
+                            <p class="category">Danh mục: ${product.category}</p>
+                            <p class="description">Sản phẩm sinh học chất lượng cao, an toàn cho sức khỏe và thân thiện với môi trường.</p>
+                            <button class="contact-btn">Liên Hệ Tư Vấn</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        // Thêm modal vào body
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+        // Hiển thị modal
+        document.getElementById('productModal').style.display = 'flex';
+
+        // Xử lý đóng modal
+        document.querySelector('.close-modal').onclick = function () {
+            document.getElementById('productModal').remove();
+        };
+
+        // Đóng modal khi click bên ngoài
+        document.getElementById('productModal').onclick = function (e) {
+            if (e.target.id === 'productModal') {
+                document.getElementById('productModal').remove();
+            }
+        };
+    }
 }
 
 // Mobile menu toggle
@@ -268,71 +307,12 @@ function toggleMobileMenu() {
     menu.classList.toggle("open");
 }
 
-// Function xử lý click vào sản phẩm trong slider
-function handleProductSliderClick(e) {
-    if (e.target.closest('.product-item')) {
-        // Chuyển đến trang tất cả sản phẩm
-        window.location.href = 'products.html';
-    }
-}
-
-// Function xử lý click vào summary content
-function handleViewAllProducts() {
-    const button = event.target;
-    const originalText = button.innerHTML;
-
-    // Hiệu ứng loading
-    button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang chuyển...';
-    button.disabled = true;
-
-    // Chuyển trang sau 1 giây
-    setTimeout(() => {
-        window.location.href = 'products.html';
-    }, 1000);
-}
-
 // Khởi tạo khi DOM load xong
 document.addEventListener('DOMContentLoaded', function () {
-    // Render sản phẩm
-    renderProducts();
+    // Render tất cả sản phẩm
+    renderAllProducts();
 
-    // Khởi tạo product swiper
-    initProductSwiper();
-
-    // Banner swiper
-    const swiper = new Swiper('.banner-swiper', {
-        loop: true,
-        autoplay: {
-            delay: 5000,
-            disableOnInteraction: false,
-        },
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-        effect: 'fade',
-        fadeEffect: {
-            crossFade: true
-        },
-        speed: 1000,
-    });
-
-    // Fade in animation
-    handleFadeInUp();
-
-    // Thêm event listener cho click vào sản phẩm
-    document.addEventListener('click', handleProductSliderClick);
-
-    // Thêm event listener cho summary content
-    const viewAllProducts = document.getElementById('viewAllProducts');
-    if (viewAllProducts) {
-        viewAllProducts.addEventListener('click', handleViewAllProducts);
-    }
-});
-
-// Scroll event for fade-in-up
-window.addEventListener('scroll', handleFadeInUp);
+    // Event listeners
+    document.addEventListener('click', handleFilterClick);
+    document.addEventListener('click', handleProductClick);
+}); 

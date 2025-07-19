@@ -306,14 +306,11 @@ document.addEventListener('DOMContentLoaded', function () {
             delay: 5000,
             disableOnInteraction: false,
         },
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
+        // Xóa dòng này để ẩn pagination
+        // pagination: {
+        //     el: '.swiper-pagination',
+        //     clickable: true,
+        // },
         effect: 'fade',
         fadeEffect: {
             crossFade: true

@@ -2659,7 +2659,12 @@ section {
     }
 }
 
-
+/* Ẩn pagination trên desktop, hiện trên mobile */
+@media (min-width: 768px) {
+    .swiper-pagination {
+        display: none !important;
+    }
+}
 
 /* Hoặc ngược lại */
 @media (max-width: 767px) {

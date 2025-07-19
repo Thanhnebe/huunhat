@@ -186,7 +186,7 @@ const products = [
 function createProductSlide(product) {
     return `
         <div class="swiper-slide">
-            <div class="product-item" data-product-id="${product.id}" style="cursor: pointer;">
+            <div class="product-item" data-product-id="${product.id}">
                 <img src="${product.image}" alt="${product.name}">
                 <div class="product-overlay">
                     <span class="product-name">${product.name}</span>
@@ -223,6 +223,7 @@ function initProductSwiper() {
     productSwiper = new Swiper('.product-swiper', {
         slidesPerView: 'auto',
         spaceBetween: 20,
+        dots: false,
         loop: true,
         autoplay: {
             delay: 3000,
@@ -232,11 +233,10 @@ function initProductSwiper() {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
         },
-        // Xóa phần pagination này
-        // pagination: {
-        //     el: '.swiper-pagination',
-        //     clickable: true,
-        // },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
         breakpoints: {
             768: {
                 slidesPerView: 2,
@@ -268,29 +268,6 @@ function toggleMobileMenu() {
     menu.classList.toggle("open");
 }
 
-// Function xử lý click vào sản phẩm trong slider
-function handleProductSliderClick(e) {
-    if (e.target.closest('.product-item')) {
-        // Chuyển đến trang tất cả sản phẩm
-        window.location.href = 'products.html';
-    }
-}
-
-// Function xử lý click vào summary content
-function handleViewAllProducts() {
-    const button = event.target;
-    const originalText = button.innerHTML;
-
-    // Hiệu ứng loading
-    button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang chuyển...';
-    button.disabled = true;
-
-    // Chuyển trang sau 1 giây
-    setTimeout(() => {
-        window.location.href = 'products.html';
-    }, 1000);
-}
-
 // Khởi tạo khi DOM load xong
 document.addEventListener('DOMContentLoaded', function () {
     // Render sản phẩm
@@ -310,10 +287,6 @@ document.addEventListener('DOMContentLoaded', function () {
             el: '.swiper-pagination',
             clickable: true,
         },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
         effect: 'fade',
         fadeEffect: {
             crossFade: true
@@ -323,15 +296,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Fade in animation
     handleFadeInUp();
-
-    // Thêm event listener cho click vào sản phẩm
-    document.addEventListener('click', handleProductSliderClick);
-
-    // Thêm event listener cho summary content
-    const viewAllProducts = document.getElementById('viewAllProducts');
-    if (viewAllProducts) {
-        viewAllProducts.addEventListener('click', handleViewAllProducts);
-    }
 });
 
 // Scroll event for fade-in-up

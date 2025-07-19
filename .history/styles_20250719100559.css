@@ -2659,7 +2659,12 @@ section {
     }
 }
 
-
+/* Ẩn pagination trên desktop, hiện trên mobile */
+@media (min-width: 768px) {
+    .swiper-pagination {
+        display: none !important;
+    }
+}
 
 /* Hoặc ngược lại */
 @media (max-width: 767px) {
@@ -2714,7 +2719,7 @@ section {
     .banner-swiper .swiper-pagination {
         bottom: 15px !important;
     }
-
+    
     .banner-swiper .swiper-pagination-bullet {
         width: 10px;
         height: 10px;
@@ -2726,7 +2731,7 @@ section {
     .banner-swiper .swiper-pagination {
         bottom: 10px !important;
     }
-
+    
     .banner-swiper .swiper-pagination-bullet {
         width: 8px;
         height: 8px;
@@ -2739,11 +2744,9 @@ section {
     0% {
         box-shadow: 0 0 0 0 rgba(0, 153, 102, 0.7);
     }
-
     70% {
         box-shadow: 0 0 0 10px rgba(0, 153, 102, 0);
     }
-
     100% {
         box-shadow: 0 0 0 0 rgba(0, 153, 102, 0);
     }

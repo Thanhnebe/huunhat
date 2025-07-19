@@ -232,11 +232,10 @@ function initProductSwiper() {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
         },
-        // Xóa phần pagination này
-        // pagination: {
-        //     el: '.swiper-pagination',
-        //     clickable: true,
-        // },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
         breakpoints: {
             768: {
                 slidesPerView: 2,
@@ -276,21 +275,6 @@ function handleProductSliderClick(e) {
     }
 }
 
-// Function xử lý click vào summary content
-function handleViewAllProducts() {
-    const button = event.target;
-    const originalText = button.innerHTML;
-
-    // Hiệu ứng loading
-    button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang chuyển...';
-    button.disabled = true;
-
-    // Chuyển trang sau 1 giây
-    setTimeout(() => {
-        window.location.href = 'products.html';
-    }, 1000);
-}
-
 // Khởi tạo khi DOM load xong
 document.addEventListener('DOMContentLoaded', function () {
     // Render sản phẩm
@@ -310,10 +294,6 @@ document.addEventListener('DOMContentLoaded', function () {
             el: '.swiper-pagination',
             clickable: true,
         },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
         effect: 'fade',
         fadeEffect: {
             crossFade: true
@@ -326,12 +306,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Thêm event listener cho click vào sản phẩm
     document.addEventListener('click', handleProductSliderClick);
-
-    // Thêm event listener cho summary content
-    const viewAllProducts = document.getElementById('viewAllProducts');
-    if (viewAllProducts) {
-        viewAllProducts.addEventListener('click', handleViewAllProducts);
-    }
 });
 
 // Scroll event for fade-in-up

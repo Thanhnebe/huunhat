@@ -220,6 +220,8 @@ function renderProductsByCategory(category) {
 let productSwiper;
 
 function initProductSwiper() {
+    const isMobile = window.innerWidth <= 768;
+    
     productSwiper = new Swiper('.product-swiper', {
         slidesPerView: 'auto',
         spaceBetween: 20,
@@ -232,11 +234,11 @@ function initProductSwiper() {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
         },
-        // Xóa phần pagination này
-        // pagination: {
-        //     el: '.swiper-pagination',
-        //     clickable: true,
-        // },
+        // Chỉ hiện pagination trên mobile
+        pagination: isMobile ? {
+            el: '.swiper-pagination',
+            clickable: true,
+        } : false,
         breakpoints: {
             768: {
                 slidesPerView: 2,
@@ -306,14 +308,11 @@ document.addEventListener('DOMContentLoaded', function () {
             delay: 5000,
             disableOnInteraction: false,
         },
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
+        // Xóa dòng này để ẩn pagination
+        // pagination: {
+        //     el: '.swiper-pagination',
+        //     clickable: true,
+        // },
         effect: 'fade',
         fadeEffect: {
             crossFade: true
