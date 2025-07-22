@@ -118,12 +118,12 @@
             </div>
             <div class="dangkynhantin-right" data-aos="fade-left">
                 <h2>Chương trình tư vấn 1:1 antgroupvn</h2>
-                <form id="zaloForm" onsubmit="return sendToZalo(event)">
-                    <input type="text" id="name" placeholder="Họ và tên" required>
-                    <input type="email" id="email" placeholder="Email" required>
-                    <input type="text" id="phone" placeholder="Số điện thoại" required>
+                <form>
+                    <input type="text" placeholder="Họ và tên" required>
+                    <input type="email" placeholder="Email" required>
+                    <input type="text" placeholder="Số điện thoại" required>
                     <div class="dangkynhantin-right-select">
-                        <select id="area" required>
+                        <select required>
                             <option value="">Chọn khu vực</option>
                             <option value="1">Hà Nội</option>
                             <option value="2">Hồ Chí Minh</option>
@@ -313,12 +313,9 @@
                     <div class="info-icon">
                         <i class="fas fa-leaf"></i>
                     </div>
-                    <div class="info-content" onclick="window.location.href='hinhanhkhaitruong.html'">
-                        <h4>Hình ảnh khai trương văn phòng & Đại lý toàn quốc
-                        </h4>
-                        <p>Hình ảnh khai trương đại lý toàn quốc
-                            đã có hơn 1500 đại lý toàn quốc trải dài từ Miền Nam ra đến Miền Bắc
-                            .</p>
+                    <div class="info-content">
+                        <h4>Hình ảnh khai trương văn phòng & Đại lý toàn quốc</h4>
+                        <p>Phù hợp cho vệ sinh, giặt ủi, chăm sóc sức khỏe – tối ưu cho gia đình và đại lý.</p>
                     </div>
                 </div>
 
@@ -336,7 +333,7 @@
                     <div class="info-icon">
                         <i class="fas fa-sync-alt"></i>
                     </div>
-                    <div class="info-content" onclick="window.location.href='quytrinh.html'">
+                    <div class="info-content">
                         <h4>Quy trình khai trương đại lý
                         </h4>
                         <p>Bộ sưu tập luôn đổi mới, đa dạng giúp đại lý dễ bán và không lo tồn kho.</p>
@@ -424,8 +421,7 @@
                 <h3>CÔNG TY TNHH ANT GROUP</h3>
                 <ul>
                     <li><i class="fas fa-map-marker-alt"></i> Tầng 2, Tòa nhà An Phát Complex, Đại lộ Vinh - Cửa lò
-                        (Đường 72m), Nghi Phú, Phường Vinh Phú, Nghệ An
-                    </li>
+                        (Đường 72m), Nghi Phú, Tp Vinh, Nghệ An</li>
                     <li><i class="fas fa-phone"></i> Hotline/Zalo: 0967151598, 0989151576</li>
                     <li><i class="fab fa-facebook"></i> Fanpage: BIO AMIDA TUYỂN ĐẠI LÝ</li>
                 </ul>
@@ -487,22 +483,6 @@
         <span class="modal-close" id="closeProductImageModal">&times;</span>
         <img class="modal-content" id="modalProductImg" src="" alt="Ảnh sản phẩm lớn">
     </div>
-    <script>
-        function sendToZalo(event) {
-            event.preventDefault();
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const areaSelect = document.getElementById('area');
-            const area = areaSelect.options[areaSelect.selectedIndex].text;
-
-            const message = `Đăng ký tư vấn:\nHọ tên: ${name}\nEmail: ${email}\nSĐT: ${phone}\nKhu vực: ${area}`;
-            const zaloNumber = '0967151598';
-            const zaloUrl = `https://zalo.me/${zaloNumber}?text=${encodeURIComponent(message)}`;
-            window.open(zaloUrl, '_blank');
-            return false;
-        }
-    </script>
 </body>
 
 </html>

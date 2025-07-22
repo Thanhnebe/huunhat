@@ -155,39 +155,9 @@ function toggleMobileMenu() {
 
 // Function xử lý click vào sản phẩm trong slider
 function handleProductSliderClick(e) {
-    const productItem = e.target.closest('.product-item');
-    if (productItem) {
-        const img = productItem.querySelector('img');
-        if (img) {
-            const modal = document.getElementById('productImageModal');
-            const modalImg = document.getElementById('modalProductImg');
-            if (modal && modalImg) {
-                modalImg.src = img.src;
-                modal.classList.add('active');
-                modal.style.display = 'flex';
-            }
-        }
-        e.preventDefault();
-        e.stopPropagation();
-        return;
-    }
-}
-
-// Đóng modal khi click vào nút đóng hoặc nền modal
-function setupProductImageModalEvents() {
-    const modal = document.getElementById('productImageModal');
-    const closeBtn = document.getElementById('closeProductImageModal');
-    if (modal && closeBtn) {
-        closeBtn.onclick = function () {
-            modal.classList.remove('active');
-            modal.style.display = 'none';
-        };
-        modal.onclick = function (event) {
-            if (event.target === modal) {
-                modal.classList.remove('active');
-                modal.style.display = 'none';
-            }
-        };
+    if (e.target.closest('.product-item')) {
+        // Chuyển đến trang tất cả sản phẩm
+        window.location.href = 'products.html';
     }
 }
 
@@ -247,7 +217,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if (viewAllProducts) {
         viewAllProducts.addEventListener('click', handleViewAllProducts);
     }
-    setupProductImageModalEvents();
 });
 
 // Scroll event for fade-in-up

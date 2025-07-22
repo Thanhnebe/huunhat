@@ -118,12 +118,12 @@
             </div>
             <div class="dangkynhantin-right" data-aos="fade-left">
                 <h2>Chương trình tư vấn 1:1 antgroupvn</h2>
-                <form id="zaloForm" onsubmit="return sendToZalo(event)">
-                    <input type="text" id="name" placeholder="Họ và tên" required>
-                    <input type="email" id="email" placeholder="Email" required>
-                    <input type="text" id="phone" placeholder="Số điện thoại" required>
+                <form>
+                    <input type="text" placeholder="Họ và tên" required>
+                    <input type="email" placeholder="Email" required>
+                    <input type="text" placeholder="Số điện thoại" required>
                     <div class="dangkynhantin-right-select">
-                        <select id="area" required>
+                        <select required>
                             <option value="">Chọn khu vực</option>
                             <option value="1">Hà Nội</option>
                             <option value="2">Hồ Chí Minh</option>
@@ -487,22 +487,6 @@
         <span class="modal-close" id="closeProductImageModal">&times;</span>
         <img class="modal-content" id="modalProductImg" src="" alt="Ảnh sản phẩm lớn">
     </div>
-    <script>
-        function sendToZalo(event) {
-            event.preventDefault();
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const areaSelect = document.getElementById('area');
-            const area = areaSelect.options[areaSelect.selectedIndex].text;
-
-            const message = `Đăng ký tư vấn:\nHọ tên: ${name}\nEmail: ${email}\nSĐT: ${phone}\nKhu vực: ${area}`;
-            const zaloNumber = '0967151598';
-            const zaloUrl = `https://zalo.me/${zaloNumber}?text=${encodeURIComponent(message)}`;
-            window.open(zaloUrl, '_blank');
-            return false;
-        }
-    </script>
 </body>
 
 </html>
