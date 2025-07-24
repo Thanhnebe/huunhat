@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tất Cả Sản Phẩm Bio Amida</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Header (giống trang chính) -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="images/Logo/Logo/amida.png" loading="lazy" alt="Bio Amida Logo" />
+            </div>
+            <nav class="nav-desktop">
+                <ul>
+                    <li><a href="index.html">Trang Chủ</a></li>
+                    <li><a href="gallery.html" class="active">Hình Ảnh Đại Lý</a></li>
+                    <li><a href="products.html">Sản Phẩm</a></li>
+
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="language-switch">
+                    <a href="#" class="active">VI</a>
+                    <span>/</span>
+                    <a href="#">EN</a>
+                </div>
+                <div class="search-icon"><i class="fas fa-search"></i></div>
+                <div class="menu-toggle" onclick="toggleMobileMenu()">☰</div>
+            </div>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <ul>
+                <li><a href="index.html">Trang Chủ</a></li>
+                <li><a href="#doanh-nghiep">Doanh nghiệp</a></li>
+                <li><a href="#san-pham">Sản Phẩm</a></li>
+                <li><a href="#phat-trien">Phát Triển Bền Vững</a></li>
+                <li><a href="#co-dong">Cổ Đông</a></li>
+                <li><a href="#truyen-thong">Truyền Thông</a></li>
+                <li><a href="#tuyen-dung">Tuyển Dụng</a></li>
+                <li><a href="#lien-he">Liên Hệ</a></li>
+            </ul>
+        </div>
+    </header>
+    <div class="banner-social">
+        <a href="https://shopee.vn/shop/1563229370" class="social-icon messenger"><i class="fab fa-shopify"></i></a>
+        <a href="https://www.tiktok.com/@antgroup86" class="social-icon youtube"><i class="fab fa-tiktok"></i></a>
+        <a href="https://www.facebook.com/antgroup86" class="social-icon facebook"><i class="fab fa-facebook"></i></a>
+        <a href="
+        https://youtube.com/@bioamida-tuyendaily?si=XDDZUY_y9TJ5B_Fb" class="social-icon youtube"><i
+                class="fab fa-youtube"></i></a>
+    </div>
+    <!-- Main Content -->
+    <main style="margin-top: 80px;">
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1>Tất Cả Sản Phẩm Bio Amida</h1>
+                <p>Khám phá bộ sưu tập đầy đủ các sản phẩm sinh học chất lượng cao</p>
+            </div>
+        </section>
+
+        <!-- Filter Section -->
+        <section class="filter-section">
+            <div class="container">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-category="all">Tất cả</button>
+                    <button class="filter-btn" data-category="Giặt ủi">Giặt ủi</button>
+                    <button class="filter-btn" data-category="Nhà bếp">Nhà bếp</button>
+                    <button class="filter-btn" data-category="Vệ sinh nhà cửa">Vệ sinh nhà cửa</button>
+                    <button class="filter-btn" data-category="Tẩy rửa">Tẩy rửa</button>
+                    <button class="filter-btn" data-category="Khử mùi">Khử mùi</button>
+                    <button class="filter-btn" data-category="Chăm sóc sức khỏe">Chăm sóc sức khỏe</button>
+                    <button class="filter-btn" data-category="Chăm sóc cá nhân">Chăm sóc cá nhân</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Grid -->
+        <section class="products-section">
+            <div class="container">
+                <div class="products-grid" id="productsGrid">
+                    <!-- Sản phẩm sẽ được render bằng JavaScript -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-antgroup">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>CÔNG TY TNHH ANT GROUP</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> Tầng 2, Tòa nhà An Phát Complex, Đại lộ Vinh - Cửa lò
+                        (Đường 72m), Nghi Phú, Tp Vinh, Nghệ An</li>
+                    <li><i class="fas fa-phone"></i> Hotline/Zalo: 0967151598, 0989151576</li>
+                    <li><i class="fab fa-facebook"></i> Fanpage: BIO AMIDA TUYỂN ĐẠI LÝ</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Cam kết & Dịch vụ</h3>
+                <ul>
+                    <li><i class="fas fa-certificate"></i> Sản phẩm đạt chuẩn kiểm nghiệm</li>
+                    <li><i class="fas fa-shipping-fast"></i> Giao hàng toàn quốc</li>
+                    <li><i class="fas fa-money-bill-wave"></i> Thu tiền tận nơi</li>
+                </ul>
+                <div class="footer-cta">
+                    Hãy trở thành đối tác tiếp theo của <b>ANT GROUP – BIO AMIDA</b> để kinh doanh an toàn, lợi nhuận
+                    bền vững!
+                </div>
+            </div>
+        </div>
+        <div class="footer-note">
+            &copy; 2024 ANT GROUP – BIO AMIDA. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="products.js"></script>
+</body>
+
+</html>

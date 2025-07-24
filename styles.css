@@ -2060,6 +2060,11 @@ section {
     object-fit: cover;
 }
 
+.problems-right img {
+    height: 35rem;
+    object-fit: scale-down;
+}
+
 /* Responsive */
 @media (max-width: 900px) {
     .problems-container {
@@ -2087,6 +2092,10 @@ section {
     .problems-list li {
         font-size: 0.95rem;
     }
+
+    .problems-right img {
+        height: auto;
+    }
 }
 
 /* Bio Amida Solution New Layout */
@@ -2104,6 +2113,11 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.bio-amida-left img {
+    height: 35rem;
+    object-fit: scale-down;
 }
 
 .bio-amida-solution-header {
@@ -2192,6 +2206,10 @@ section {
 
 /* Responsive */
 @media (max-width: 900px) {
+    .bio-amida-solution {
+        padding: 80px 20px;
+    }
+
     .bio-amida-container {
         grid-template-columns: 1fr;
         gap: 24px;
@@ -2204,6 +2222,11 @@ section {
 
     .bio-amida-main-img {
         max-width: 100%;
+    }
+
+    .bio-amida-left img {
+        height: auto;
+        object-fit: scale-down;
     }
 }
 

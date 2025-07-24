@@ -73,7 +73,6 @@
         <!-- Social icons bên trái -->
         <div class="banner-social">
             <a href="https://shopee.vn/shop/1563229370" class="social-icon messenger"><i class="fab fa-shopify"></i></a>
-            <a href="#" class="social-icon phone"><i class="fas fa-phone"></i></a>
             <a href="https://www.tiktok.com/@antgroup86" class="social-icon youtube"><i class="fab fa-tiktok"></i></a>
             <a href="https://www.facebook.com/antgroup86" class="social-icon facebook"><i
                     class="fab fa-facebook"></i></a>
@@ -118,27 +117,26 @@
             </div>
             <div class="dangkynhantin-right" data-aos="fade-left">
                 <h2>Chương trình tư vấn 1:1 antgroupvn</h2>
-                <form id="zaloForm" onsubmit="return sendToZalo(event)">
-                    <input type="text" id="name" placeholder="Họ và tên" required>
-                    <input type="email" id="email" placeholder="Email" required>
-                    <input type="text" id="phone" placeholder="Số điện thoại" required>
-                    <div class="dangkynhantin-right-select">
-                        <select id="area" required>
-                            <option value="">Chọn khu vực</option>
-                            <option value="1">Hà Nội</option>
-                            <option value="2">Hồ Chí Minh</option>
-                            <option value="3">Đà Nẵng</option>
-                            <option value="4">Hải Phòng</option>
-                            <option value="5">Cần Thơ</option>
-                            <option value="6">Bình Dương</option>
-                            <option value="7">Bình Phước</option>
-                            <option value="8">Bình Thuận</option>
-                            <option value="9">Bình Trị Đông</option>
-                        </select>
-                    </div>
-                    <button type="submit">Đăng ký tư vấn</button>
-                </form>
+                <form id="zaloForm">
+                    <input type="text" name="name" placeholder="Họ và tên" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="text" name="phone" placeholder="Số điện thoại" required>
+                    <select name="area" required>
+                        <option value="">Chọn khu vực</option>
+                        <option value="Hà Nội">Hà Nội</option>
+                        <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                        <option value="Đà Nẵng">Đà Nẵng</option>
+                        <option value="Hải Phòng">Hải Phòng</option>
+                        <option value="Cần Thơ">Cần Thơ</option>
+                        <option value="Bình Dương">Bình Dương</option>
+                        <option value="Bình Phước">Bình Phước</option>
+                        <option value="Bình Thuận">Bình Thuận</option>
+                        <option value="Bình Trị Đông">Bình Trị Đông</option>
+                    </select>
             </div>
+            <button type="submit">Đăng ký tư vấn</button>
+            </form>
+        </div>
         </div>
     </section>
     <!-- About Us Section -->
@@ -487,22 +485,6 @@
         <span class="modal-close" id="closeProductImageModal">&times;</span>
         <img class="modal-content" id="modalProductImg" src="" alt="Ảnh sản phẩm lớn">
     </div>
-    <script>
-        function sendToZalo(event) {
-            event.preventDefault();
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const areaSelect = document.getElementById('area');
-            const area = areaSelect.options[areaSelect.selectedIndex].text;
-
-            const message = `Đăng ký tư vấn:\nHọ tên: ${name}\nEmail: ${email}\nSĐT: ${phone}\nKhu vực: ${area}`;
-            const zaloNumber = '0967151598';
-            const zaloUrl = `https://zalo.me/${zaloNumber}?text=${encodeURIComponent(message)}`;
-            window.open(zaloUrl, '_blank');
-            return false;
-        }
-    </script>
 </body>
 
 </html>

@@ -1,5 +1,5 @@
 // Mảng ảnh đại lý
-const products = [
+const products1 = [
     {
         id: 1,
         image: "images/quytrinh/z6606560319806_443226f1a3761b66834e061cc7c36ed3.jpg",
@@ -67,6 +67,41 @@ const products = [
         name: "Khen thưởng đại lý"
     }
 ];
+
+const products = [
+    { id: 1, image: "images/khaitruong/kyanh/DAT_5559.jpg", alt: "Khai trương ở Kỳ Anh", name: "Khai trương ở Kỳ Anh" },
+    { id: 2, image: "images/khaitruong/kyanh/DAT_5569.jpg", alt: "Khai trương ở Kỳ Anh", name: "Khai trương ở Kỳ Anh" },
+    { id: 3, image: "images/khaitruong/kyanh/DAT_5578.jpg", alt: "Khai trương ở Kỳ Anh", name: "Khai trương ở Kỳ Anh" },
+    { id: 4, image: "images/khaitruong/kyanh/DAT_5588.jpg", alt: "Khai trương ở Kỳ Anh", name: "Khai trương ở Kỳ Anh" },
+    { id: 5, image: "images/khaitruong/kyanh/DAT_5611.jpg", alt: "Khai trương ở Kỳ Anh", name: "Khai trương ở Kỳ Anh" },
+    { id: 6, image: "images/khaitruong/kyanh/DAT_5628.jpg", alt: "Khai trương ở Kỳ Anh", name: "Khai trương ở Kỳ Anh" },
+    { id: 7, image: "images/khaitruong/kyanh/DAT_5680.jpg", alt: "Khai trương ở Kỳ Anh", name: "Khai trương ở Kỳ Anh" },
+    { id: 8, image: "images/khaitruong/kyanh/DAT_5686.jpg", alt: "Khai trương ở Kỳ Anh", name: "Khai trương ở Kỳ Anh" },
+    { id: 9, image: "images/khaitruong/kyanh/DAT_5697.jpg", alt: "Khai trương ở Kỳ Anh", name: "Khai trương ở Kỳ Anh" },
+    { id: 10, image: "images/khaitruong/kyanh/DAT_5711.jpg", alt: "Khai trương ở Kỳ Anh", name: "Khai trương ở Kỳ Anh" },
+    { id: 11, image: "images/khaitruong/kyanh/DAT_5729.jpg", alt: "Khai trương ở Kỳ Anh", name: "Khai trương ở Kỳ Anh" },
+    { id: 12, image: "images/khaitruong/kyanh/DAT_5740.jpg", alt: "Khai trương ở Kỳ Anh", name: "Khai trương ở Kỳ Anh" },
+    { id: 13, image: "images/khaitruong/kyanh/DAT_5784.jpg", alt: "Khai trương ở Kỳ Anh", name: "Khai trương ở Kỳ Anh" },
+    { id: 14, image: "images/khaitruong/kyanh/DAT_5848.jpg", alt: "Khai trương ở Kỳ Anh", name: "Khai trương ở Kỳ Anh" },
+    { id: 15, image: "images/khaitruong/kyanh/DAT_5860.jpg", alt: "Khai trương ở Kỳ Anh", name: "Khai trương ở Kỳ Anh" },
+    { id: 16, image: "images/khaitruong/kyanh/DAT_5864.jpg", alt: "Khai trương ở Kỳ Anh", name: "Khai trương ở Kỳ Anh" },
+    { id: 17, image: "images/khaitruong/kyanh/DAT_5874.jpg", alt: "Khai trương ở Kỳ Anh", name: "Khai trương ở Kỳ Anh" },
+    { id: 18, image: "images/khaitruong/kyanh/DAT_5892.jpg", alt: "Khai trương ở Kỳ Anh", name: "Khai trương ở Kỳ Anh" },
+    { id: 19, image: "images/khaitruong/kyanh/DAT_5896.jpg", alt: "Khai trương ở Kỳ Anh", name: "Khai trương ở Kỳ Anh" },
+    { id: 20, image: "images/khaitruong/kyanh/DAT_5933.jpg", alt: "Khai trương ở Kỳ Anh", name: "Khai trương ở Kỳ Anh" },
+    { id: 21, image: "images/khaitruong/kyanh/DAT_5939.jpg", alt: "Khai trương ở Kỳ Anh", name: "Khai trương ở Kỳ Anh" },
+    { id: 22, image: "images/khaitruong/kyanh/DAT_5950.jpg", alt: "Khai trương ở Kỳ Anh", name: "Khai trương ở Kỳ Anh" },
+    { id: 23, image: "images/khaitruong/kyanh/DAT_5960.jpg", alt: "Khai trương ở Kỳ Anh", name: "Khai trương ở Kỳ Anh" },
+    { id: 24, image: "images/khaitruong/kyanh/DAT_6106.jpg", alt: "Khai trương ở Kỳ Anh", name: "Khai trương ở Kỳ Anh" },
+    { id: 25, image: "images/khaitruong/kyanh/DAT_6217.jpg", alt: "Khai trương ở Kỳ Anh", name: "Khai trương ở Kỳ Anh" },
+    { id: 26, image: "images/khaitruong/kyanh/DAT_6266.jpg", alt: "Khai trương ở Kỳ Anh", name: "Khai trương ở Kỳ Anh" },
+    { id: 27, image: "images/khaitruong/kyanh/DAT_6273.jpg", alt: "Khai trương ở Kỳ Anh", name: "Khai trương ở Kỳ Anh" },
+    { id: 28, image: "images/khaitruong/kyanh/DAT_6286.jpg", alt: "Khai trương ở Kỳ Anh", name: "Khai trương ở Kỳ Anh" },
+    { id: 29, image: "images/khaitruong/kyanh/DAT_6314.jpg", alt: "Khai trương ở Kỳ Anh", name: "Khai trương ở Kỳ Anh" },
+    { id: 30, image: "images/khaitruong/kyanh/DAT_6331.jpg", alt: "Khai trương ở Kỳ Anh", name: "Khai trương ở Kỳ Anh" },
+    { id: 31, image: "images/khaitruong/kyanh/DAT_6377.jpg", alt: "Khai trương ở Kỳ Anh", name: "Khai trương ở Kỳ Anh" }
+];
+
 // Function tạo HTML cho sản phẩm
 function createProductSlide(product) {
     return `

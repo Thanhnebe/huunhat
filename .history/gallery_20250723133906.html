@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hình Ảnh Đại Lý Bio Amida - Quy Trình Làm Việc</title>
+    <meta name="description"
+        content="Xem hình ảnh thực tế đại lý Bio Amida, quy trình làm việc và hoạt động kinh doanh của hệ thống phân phối toàn quốc">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="images/Logo/Logo/amida.png" alt="Bio Amida Logo" />
+            </div>
+            <nav class="nav-desktop">
+                <ul>
+                    <li><a href="index.html">Trang Chủ</a></li>
+                    <li><a href="products.html">Sản Phẩm</a></li>
+                    <li><a href="gallery.html" class="active">Hình Ảnh Đại Lý</a></li>
+
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="language-switch">
+                    <a href="#" class="active">VI</a>
+                    <span>/</span>
+                    <a href="#">EN</a>
+                </div>
+                <div class="search-icon"><i class="fas fa-search"></i></div>
+                <div class="menu-toggle" onclick="toggleMobileMenu()">☰</div>
+            </div>
+        </div>
+    </header>
+    <div class="banner-social">
+        <a href="https://shopee.vn/shop/1563229370" class="social-icon messenger"><i class="fab fa-shopify"></i></a>
+        <a href="https://www.tiktok.com/@antgroup86" class="social-icon youtube"><i class="fab fa-tiktok"></i></a>
+        <a href="https://www.facebook.com/antgroup86" class="social-icon facebook"><i class="fab fa-facebook"></i></a>
+        <a href="
+        https://youtube.com/@bioamida-tuyendaily?si=XDDZUY_y9TJ5B_Fb" class="social-icon youtube"><i
+                class="fab fa-youtube"></i></a>
+    </div>
+
+    <!-- Main Content -->
+    <main style="margin-top: 80px;">
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1>Hình Ảnh Đại Lý Bio Amida</h1>
+                <p>Cung cấp hình ảnh, video, banner, giấy tờ rõ ràng để hỗ trợ đại lý xây dựng uy tín.
+                </p>
+            </div>
+        </section>
+
+        <!-- Gallery Grid -->
+        <section class="gallery-section">
+            <div class="container">
+                <div class="gallery-grid" id="galleryGrid">
+                    <!-- Ảnh sẽ được load bằng JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Lightbox Modal -->
+        <div id="lightboxModal" class="lightbox-modal">
+            <span class="close-lightbox">&times;</span>
+            <img id="lightboxImage" class="lightbox-content">
+            <div class="lightbox-nav">
+                <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
+                <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="lightbox-caption" id="lightboxCaption"></div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-antgroup">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>CÔNG TY TNHH ANT GROUP</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> Tầng 2, Tòa nhà An Phát Complex, Đại lộ Vinh - Cửa lò
+                        (Đường 72m), Nghi Phú, Tp Vinh, Nghệ An</li>
+                    <li><i class="fas fa-phone"></i> Hotline/Zalo: 0967151598, 0989151576</li>
+                    <li><i class="fab fa-facebook"></i> Fanpage: BIO AMIDA TUYỂN ĐẠI LÝ</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-note">
+            &copy; 2024 ANT GROUP – BIO AMIDA. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="gallery.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
