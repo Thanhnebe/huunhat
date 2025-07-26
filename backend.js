@@ -19,9 +19,59 @@ const ZALO_CONFIG = {
     app_id: process.env.ZALO_APP_ID,
     app_secret: process.env.ZALO_APP_SECRET,
     oa_id: process.env.ZALO_OA_ID,
-    access_token: process.env.ZALO_ACCESS_TOKEN,
     admin_user_id: process.env.ZALO_ADMIN_USER_ID
 };
+
+// Biến lưu token hiện tại
+let currentAccessToken = process.env.ZALO_ACCESS_TOKEN;
+let tokenExpiryTime = null;
+
+// Function tự động lấy access token mới
+async function refreshZaloToken() {
+    try {
+        console.log('🔄 Đang refresh Zalo access token...');
+
+        // Tạo authorization URL
+        const authUrl = `https://oauth.zaloapp.com/v4/permission?app_id=${ZALO_CONFIG.app_id}&redirect_uri=${encodeURIComponent('https://huunhat11.vercel.app/api/zalo/callback')}&state=refresh_${Date.now()}`;
+
+        console.log('📋 Authorization URL:', authUrl);
+        console.log('⚠️ Vui lòng truy cập URL trên, đăng nhập và cấp quyền để lấy code mới');
+
+        return {
+            success: false,
+            message: 'Cần lấy code mới từ authorization URL',
+            authUrl: authUrl
+        };
+
+    } catch (error) {
+        console.error('❌ Lỗi refresh token:', error);
+        return {
+            success: false,
+            message: 'Không thể refresh token',
+            error: error.message
+        };
+    }
+}
+
+// Function kiểm tra và lấy token hợp lệ
+async function getValidAccessToken() {
+    // Nếu chưa có token hoặc token đã hết hạn
+    if (!currentAccessToken || currentAccessToken === 'YOUR_OA_ACCESS_TOKEN') {
+        console.log('⚠️ Chưa có access token, cần lấy token mới');
+        return await refreshZaloToken();
+    }
+
+    return {
+        success: true,
+        accessToken: currentAccessToken
+    };
+}
+
+// Function cập nhật token
+function updateAccessToken(newToken) {
+    currentAccessToken = newToken;
+    console.log('✅ Đã cập nhật access token mới');
+}
 
 // Cấu hình Email (Gmail) - chỉ dùng nếu cần
 const EMAIL_CONFIG = {
@@ -74,20 +124,40 @@ app.post('/api/zalo-register', async (req, res) => {
 
     try {
         // Gửi tin nhắn Zalo (nếu có cấu hình)
-        if (ZALO_CONFIG.access_token !== 'YOUR_OA_ACCESS_TOKEN' && ZALO_CONFIG.admin_user_id !== 'USER_ID_ADMIN') {
+        if (ZALO_CONFIG.admin_user_id !== 'USER_ID_ADMIN') {
             try {
-                await axios.post('https://openapi.zalo.me/v2.0/oa/message', {
-                    recipient: { user_id: ZALO_CONFIG.admin_user_id },
-                    message: { text: zaloMessage }
-                }, {
-                    headers: {
-                        'access_token': ZALO_CONFIG.access_token,
-                        'Content-Type': 'application/json'
+                // Lấy token hợp lệ
+                const tokenResult = await getValidAccessToken();
+
+                if (!tokenResult.success) {
+                    console.log('⚠️ Không thể lấy access token:', tokenResult.message);
+                    if (tokenResult.authUrl) {
+                        console.log('📋 Authorization URL:', tokenResult.authUrl);
                     }
-                });
-                console.log('✅ Gửi tin nhắn Zalo thành công');
+                } else {
+                    // Gửi tin nhắn với token hợp lệ
+                    await axios.post('https://openapi.zalo.me/v2.0/oa/message', {
+                        recipient: { user_id: ZALO_CONFIG.admin_user_id },
+                        message: { text: zaloMessage }
+                    }, {
+                        headers: {
+                            'access_token': tokenResult.accessToken,
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                    console.log('✅ Gửi tin nhắn Zalo thành công');
+                }
             } catch (zaloError) {
                 console.log('❌ Lỗi gửi tin nhắn Zalo:', zaloError.message);
+
+                // Nếu lỗi do token hết hạn, thử refresh
+                if (zaloError.response?.data?.error === -216) {
+                    console.log('🔄 Token hết hạn, đang thử refresh...');
+                    const refreshResult = await refreshZaloToken();
+                    if (refreshResult.authUrl) {
+                        console.log('📋 Vui lòng truy cập để lấy token mới:', refreshResult.authUrl);
+                    }
+                }
             }
         }
 
@@ -143,14 +213,24 @@ app.post('/api/zalo/token', async (req, res) => {
 
     try {
         const response = await axios.post('https://oauth.zaloapp.com/v4/access_token', {
-            app_id: '3635930658555273743', // App ID của bạn
-            app_secret: ZALO_CONFIG.app_secret, // App Secret của bạn
+            app_id: ZALO_CONFIG.app_id,
+            app_secret: ZALO_CONFIG.app_secret,
             code: code,
             grant_type: 'authorization_code'
         });
 
         console.log('✅ Access token received:', response.data);
-        res.json(response.data);
+
+        // Cập nhật token mới vào biến
+        if (response.data.access_token) {
+            updateAccessToken(response.data.access_token);
+        }
+
+        res.json({
+            success: true,
+            message: 'Token đã được cập nhật thành công',
+            data: response.data
+        });
 
     } catch (error) {
         console.error('❌ Error getting access token:', error.response?.data || error.message);
@@ -159,6 +239,17 @@ app.post('/api/zalo/token', async (req, res) => {
             details: error.response?.data || error.message
         });
     }
+});
+
+// API để lấy authorization URL
+app.get('/api/zalo/auth-url', (req, res) => {
+    const authUrl = `https://oauth.zaloapp.com/v4/permission?app_id=${ZALO_CONFIG.app_id}&redirect_uri=${encodeURIComponent('https://huunhat11.vercel.app/api/zalo/callback')}&state=refresh_${Date.now()}`;
+
+    res.json({
+        success: true,
+        authUrl: authUrl,
+        message: 'Truy cập URL này để lấy authorization code'
+    });
 });
 
 // API kiểm tra trạng thái server
