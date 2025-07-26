@@ -326,9 +326,7 @@ async function sendToZalo(event) {
     };
 
     // Gửi dữ liệu đến serverless function
-    const apiUrl = window.location.hostname === 'localhost'
-        ? 'http://localhost:3000/api/zalo-register'
-        : '/api/zalo-register';
+    const apiUrl = "https://huunhat11.vercel.app/api/zalo-register";
 
     try {
         const response = await fetch(apiUrl, {
