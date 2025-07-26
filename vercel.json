@@ -10,16 +10,27 @@
     },
     "rewrites": [
         {
-            "source": "/zalo/callback",
+            "source": "/api/zalo/callback",
             "destination": "/api/zalo-callback"
         }
     ],
-    "env": {
-        "ZALO_ACCESS_TOKEN": "@zalo_access_token",
-        "ZALO_APP_SECRET": "@zalo_app_secret",
-        "EMAIL_SERVICE": "@email_service",
-        "SENDGRID_API_KEY": "@sendgrid_api_key",
-        "ADMIN_EMAIL": "@admin_email",
-        "FROM_EMAIL": "@from_email"
-    }
+    "headers": [
+        {
+            "source": "/api/(.*)",
+            "headers": [
+                {
+                    "key": "Access-Control-Allow-Origin",
+                    "value": "*"
+                },
+                {
+                    "key": "Access-Control-Allow-Methods",
+                    "value": "GET, POST, OPTIONS"
+                },
+                {
+                    "key": "Access-Control-Allow-Headers",
+                    "value": "Content-Type, Authorization"
+                }
+            ]
+        }
+    ]
 }

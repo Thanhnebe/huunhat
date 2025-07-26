@@ -119,22 +119,46 @@
             <div class="dangkynhantin-right" data-aos="fade-left">
                 <h2>Chương trình tư vấn 1:1 antgroupvn</h2>
                 <form id="zaloForm" onsubmit="return sendToZalo(event)">
-                    <input type="text" name="name" placeholder="Họ và tên" required>
-                    <input type="email" name="email" placeholder="Email" required>
-                    <input type="text" name="phone" placeholder="Số điện thoại" required>
-                    <select name="area" required>
-                        <option value="">Chọn khu vực</option>
-                        <option value="Hà Nội">Hà Nội</option>
-                        <option value="Hồ Chí Minh">Hồ Chí Minh</option>
-                        <option value="Đà Nẵng">Đà Nẵng</option>
-                        <option value="Hải Phòng">Hải Phòng</option>
-                        <option value="Cần Thơ">Cần Thơ</option>
-                        <option value="Bình Dương">Bình Dương</option>
-                        <option value="Bình Phước">Bình Phước</option>
-                        <option value="Bình Thuận">Bình Thuận</option>
-                        <option value="Bình Trị Đông">Bình Trị Đông</option>
-                    </select>
-                    <button type="submit">Đăng ký tư vấn</button>
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Họ và tên *" required>
+                        <small class="form-hint">Vui lòng nhập họ tên đầy đủ</small>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Email (không bắt buộc)">
+                        <small class="form-hint">Để nhận thông tin chi tiết qua email</small>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" name="phone" placeholder="Số điện thoại *" required>
+                        <small class="form-hint">Nhập số điện thoại 10-11 chữ số</small>
+                    </div>
+                    <div class="form-group">
+                        <select name="area" required>
+                            <option value="">Chọn khu vực *</option>
+                            <option value="Hà Nội">Hà Nội</option>
+                            <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                            <option value="Đà Nẵng">Đà Nẵng</option>
+                            <option value="Hải Phòng">Hải Phòng</option>
+                            <option value="Cần Thơ">Cần Thơ</option>
+                            <option value="Bình Dương">Bình Dương</option>
+                            <option value="Bình Phước">Bình Phước</option>
+                            <option value="Bình Thuận">Bình Thuận</option>
+                            <option value="Nghệ An">Nghệ An</option>
+                            <option value="Thanh Hóa">Thanh Hóa</option>
+                            <option value="Quảng Trị">Quảng Trị</option>
+                            <option value="Thừa Thiên Huế">Thừa Thiên Huế</option>
+                            <option value="Quảng Nam">Quảng Nam</option>
+                            <option value="Khác">Khu vực khác</option>
+                        </select>
+                        <small class="form-hint">Chọn khu vực gần nhất</small>
+                    </div>
+                    <button type="submit">
+                        <i class="fas fa-paper-plane"></i>
+                        Đăng ký tư vấn miễn phí
+                    </button>
+                    <small class="form-note">
+                        <i class="fas fa-shield-alt"></i>
+                        Thông tin của bạn được bảo mật và chỉ sử dụng để liên hệ tư vấn
+                    </small>
                 </form>
             </div>
         </div>

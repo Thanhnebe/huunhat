@@ -9,15 +9,20 @@ app.use(express.json());
 app.use(cors());
 
 // Cấu hình Zalo OA
-const OA_ACCESS_TOKEN = 'YOUR_OA_ACCESS_TOKEN'; // Lấy trong trang quản trị OA
-const ADMIN_USER_ID = 'USER_ID_ADMIN'; // Lấy user_id của bạn (admin OA)
+const ZALO_CONFIG = {
+    app_id: process.env.ZALO_APP_ID || '3635930658555273743',
+    app_secret: process.env.ZALO_APP_SECRET || 'YOUR_APP_SECRET',
+    oa_id: process.env.ZALO_OA_ID || '3416749500273400315',
+    access_token: process.env.ZALO_ACCESS_TOKEN || 'YOUR_OA_ACCESS_TOKEN',
+    admin_user_id: process.env.ZALO_ADMIN_USER_ID || 'USER_ID_ADMIN'
+};
 
 // Cấu hình Email (Gmail)
 const EMAIL_CONFIG = {
     service: 'gmail',
     auth: {
-        user: 'your-email@gmail.com', // Email của bạn
-        pass: 'your-app-password' // Mật khẩu ứng dụng Gmail
+        user: process.env.EMAIL_USER || 'your-email@gmail.com',
+        pass: process.env.EMAIL_PASS || 'your-app-password'
     }
 };
 
@@ -63,14 +68,14 @@ app.post('/api/zalo-register', async (req, res) => {
 
     try {
         // Gửi tin nhắn Zalo (nếu có cấu hình)
-        if (OA_ACCESS_TOKEN !== 'YOUR_OA_ACCESS_TOKEN' && ADMIN_USER_ID !== 'USER_ID_ADMIN') {
+        if (ZALO_CONFIG.access_token !== 'YOUR_OA_ACCESS_TOKEN' && ZALO_CONFIG.admin_user_id !== 'USER_ID_ADMIN') {
             try {
                 await axios.post('https://openapi.zalo.me/v2.0/oa/message', {
-                    recipient: { user_id: ADMIN_USER_ID },
+                    recipient: { user_id: ZALO_CONFIG.admin_user_id },
                     message: { text: zaloMessage }
                 }, {
                     headers: {
-                        'access_token': OA_ACCESS_TOKEN,
+                        'access_token': ZALO_CONFIG.access_token,
                         'Content-Type': 'application/json'
                     }
                 });
@@ -110,13 +115,63 @@ app.post('/api/zalo-register', async (req, res) => {
     }
 });
 
+// API callback cho Zalo OA
+app.get('/api/zalo/callback', (req, res) => {
+    const { code, state } = req.query;
+
+    console.log('🔔 Zalo callback received:', { code, state });
+
+    // Xử lý authorization code từ Zalo
+    if (code) {
+        // Lưu code để đổi lấy access token
+        console.log('✅ Authorization code received:', code);
+        res.json({
+            success: true,
+            message: 'Authorization successful',
+            code: code
+        });
+    } else {
+        res.status(400).json({
+            error: 'No authorization code received'
+        });
+    }
+});
+
+// API để đổi authorization code lấy access token
+app.post('/api/zalo/token', async (req, res) => {
+    const { code } = req.body;
+
+    if (!code) {
+        return res.status(400).json({ error: 'Authorization code required' });
+    }
+
+    try {
+        const response = await axios.post('https://oauth.zaloapp.com/v4/access_token', {
+            app_id: '3635930658555273743', // App ID của bạn
+            app_secret: 'YOUR_APP_SECRET', // App Secret của bạn
+            code: code,
+            grant_type: 'authorization_code'
+        });
+
+        console.log('✅ Access token received:', response.data);
+        res.json(response.data);
+
+    } catch (error) {
+        console.error('❌ Error getting access token:', error.response?.data || error.message);
+        res.status(500).json({
+            error: 'Failed to get access token',
+            details: error.response?.data || error.message
+        });
+    }
+});
+
 // API kiểm tra trạng thái server
 app.get('/api/health', (req, res) => {
     res.json({
         status: 'OK',
         timestamp: new Date().toISOString(),
         services: {
-            zalo: OA_ACCESS_TOKEN !== 'YOUR_OA_ACCESS_TOKEN',
+            zalo: ZALO_CONFIG.access_token !== 'YOUR_OA_ACCESS_TOKEN',
             email: EMAIL_CONFIG.auth.user !== 'your-email@gmail.com'
         }
     });
@@ -126,5 +181,5 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`🚀 Server đang chạy trên port ${PORT}`);
     console.log(`📧 Email: ${EMAIL_CONFIG.auth.user !== 'your-email@gmail.com' ? 'Đã cấu hình' : 'Chưa cấu hình'}`);
-    console.log(`💬 Zalo: ${OA_ACCESS_TOKEN !== 'YOUR_OA_ACCESS_TOKEN' ? 'Đã cấu hình' : 'Chưa cấu hình'}`);
+    console.log(`💬 Zalo: ${ZALO_CONFIG.access_token !== 'YOUR_OA_ACCESS_TOKEN' ? 'Đã cấu hình' : 'Chưa cấu hình'}`);
 });
