@@ -342,59 +342,14 @@ async function sendToZalo(event) {
         const result = await response.json();
 
         if (result.success) {
-            // Thành công
-            let message = 'Đăng ký thành công! Chúng tôi sẽ liên hệ với bạn sớm nhất.';
-
-            if (result.zalo_sent) {
-                message += ' ✅ Tin nhắn đã được gửi đến Zalo.';
-            } else if (result.zalo_error) {
-                message += ' ⚠️ Đã lưu thông tin, sẽ liên hệ sớm.';
-            }
-
-            showSuccessMessage(message);
+            showSuccessMessage('Đăng ký thành công! Chúng tôi sẽ liên hệ với bạn sớm nhất.');
             form.reset();
         } else {
-            // Lỗi từ server
             showErrorMessage(result.error || 'Có lỗi xảy ra, vui lòng thử lại.');
         }
     } catch (error) {
         console.error('Lỗi kết nối:', error);
-        // Fallback: Mở Zalo OA nếu không kết nối được server
-        const message = `🔔 ĐĂNG KÝ TƯ VẤN MỚI - BIO AMIDA
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-👤 Họ và tên: ${name}
-📱 Số điện thoại: ${phone}
-📍 Khu vực: ${area}
-📧 Email: ${email || 'Không có'}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-💬 Nhu cầu: Tư vấn về sản phẩm Bio Amida và cơ hội kinh doanh
-
-⏰ Thời gian: ${new Date().toLocaleString('vi-VN', {
-            timeZone: 'Asia/Ho_Chi_Minh',
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit'
-        })}
-
-🌐 Nguồn: Website Bio Amida
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`;
-
-        const encodedMessage = encodeURIComponent(message);
-        const zaloOAUrl = 'https://zalo.me/3416749500273400315';
-        const fullUrl = `${zaloOAUrl}?text=${encodedMessage}`;
-
-        showSuccessMessage('Đăng ký thành công! Đang mở Zalo để gửi thông tin...');
-        setTimeout(() => {
-            window.open(fullUrl, '_blank');
-        }, 1000);
-
-        form.reset();
+        showErrorMessage('Không thể kết nối tới máy chủ. Vui lòng thử lại sau.');
     }
 
     // Khôi phục nút submit
