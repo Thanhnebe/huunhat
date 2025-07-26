@@ -3,10 +3,20 @@
     "functions": {
         "api/zalo-register.js": {
             "maxDuration": 30
+        },
+        "api/zalo-callback.js": {
+            "maxDuration": 30
         }
     },
+    "rewrites": [
+        {
+            "source": "/zalo/callback",
+            "destination": "/api/zalo-callback"
+        }
+    ],
     "env": {
         "ZALO_ACCESS_TOKEN": "@zalo_access_token",
+        "ZALO_APP_SECRET": "@zalo_app_secret",
         "EMAIL_SERVICE": "@email_service",
         "SENDGRID_API_KEY": "@sendgrid_api_key",
         "ADMIN_EMAIL": "@admin_email",
