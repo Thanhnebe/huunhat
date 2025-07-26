@@ -1,0 +1,31 @@
+{
+    "name": "bio-amida-backend",
+    "version": "1.0.0",
+    "description": "Backend server cho website Bio Amida - Xử lý đăng ký tư vấn và gửi thông báo",
+    "main": "backend.js",
+    "scripts": {
+        "start": "node backend.js",
+        "dev": "nodemon backend.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "bio-amida",
+        "zalo-api",
+        "email-notification",
+        "registration"
+    ],
+    "author": "Bio Amida Team",
+    "license": "MIT",
+    "dependencies": {
+        "express": "^4.18.2",
+        "axios": "^1.6.0",
+        "nodemailer": "^6.9.7",
+        "cors": "^2.8.5"
+    },
+    "devDependencies": {
+        "nodemon": "^3.0.1"
+    },
+    "engines": {
+        "node": ">=14.0.0"
+    }
+}

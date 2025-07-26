@@ -1,0 +1,21 @@
+# Zalo OA Configuration
+# Lấy từ: https://developers.zalo.me/
+ZALO_OA_ACCESS_TOKEN=your_zalo_oa_access_token_here
+ZALO_ADMIN_USER_ID=your_zalo_admin_user_id_here
+
+# Gmail Configuration
+# Tạo App Password từ: https://myaccount.google.com/apppasswords
+GMAIL_USER=your-email@gmail.com
+GMAIL_PASS=your-16-digit-app-password
+
+# Server Configuration
+PORT=3000
+NODE_ENV=development
+
+# Optional: Database (for future use)
+# DATABASE_URL=your_database_connection_string
+
+# Optional: SMS Service (for future use)
+# TWILIO_ACCOUNT_SID=your_twilio_account_sid
+# TWILIO_AUTH_TOKEN=your_twilio_auth_token
+# TWILIO_PHONE_NUMBER=your_twilio_phone_number 
