@@ -312,29 +312,8 @@ function sendToZalo(event) {
         area: area
     };
 
-    // Gửi đến backend server
-    fetch('http://localhost:3000/api/zalo-register', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data)
-    })
-        .then(response => response.json())
-        .then(result => {
-            if (result.success) {
-                // Thành công
-                showSuccessMessage('Đăng ký thành công! Chúng tôi sẽ liên hệ với bạn sớm nhất.');
-                form.reset();
-            } else {
-                // Lỗi từ server
-                showErrorMessage(result.error || 'Có lỗi xảy ra, vui lòng thử lại.');
-            }
-        })
-        .catch(error => {
-            console.error('Lỗi kết nối:', error);
-            // Fallback: Mở Zalo OA nếu không kết nối được server
-            const message = `🔔 ĐĂNG KÝ TƯ VẤN MỚI
+    // Tạo tin nhắn cho Zalo OA
+    const message = `🔔 ĐĂNG KÝ TƯ VẤN MỚI
 
 👤 Họ và tên: ${name}
 📧 Email: ${email}
@@ -345,22 +324,27 @@ function sendToZalo(event) {
 
 ⏰ Thời gian: ${new Date().toLocaleString('vi-VN')}`;
 
-            const encodedMessage = encodeURIComponent(message);
-            const zaloOAUrl = 'https://zalo.me/3416749500273400315';
-            const fullUrl = `${zaloOAUrl}?text=${encodedMessage}`;
+    // Mã hóa tin nhắn
+    const encodedMessage = encodeURIComponent(message);
 
-            showSuccessMessage('Đăng ký thành công! Đang mở Zalo...');
-            setTimeout(() => {
-                window.open(fullUrl, '_blank');
-            }, 1000);
+    // URL Zalo OA của bạn
+    const zaloOAUrl = 'https://zalo.me/3416749500273400315';
+    const fullUrl = `${zaloOAUrl}?text=${encodedMessage}`;
 
-            form.reset();
-        })
-        .finally(() => {
-            // Khôi phục nút submit
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
-        });
+    // Hiển thị thông báo thành công
+    showSuccessMessage('Đăng ký thành công! Đang mở Zalo để gửi thông tin...');
+
+    // Mở Zalo OA với tin nhắn đã điền sẵn
+    setTimeout(() => {
+        window.open(fullUrl, '_blank');
+    }, 1000);
+
+    // Reset form
+    form.reset();
+
+    // Khôi phục nút submit
+    submitBtn.innerHTML = originalText;
+    submitBtn.disabled = false;
 
     return false;
 }
