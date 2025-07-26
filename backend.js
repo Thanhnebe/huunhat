@@ -8,6 +8,12 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+// Serve static files
+app.use(express.static('.'));
+app.use('/images', express.static('images'));
+app.use('/css', express.static('css'));
+app.use('/js', express.static('js'));
+
 // Cấu hình Zalo OA
 const ZALO_CONFIG = {
     app_id: process.env.ZALO_APP_ID || '3635930658555273743',
@@ -113,6 +119,11 @@ app.post('/api/zalo-register', async (req, res) => {
             details: err.message
         });
     }
+});
+
+// Serve trang chủ
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
 });
 
 // API callback cho Zalo OA
