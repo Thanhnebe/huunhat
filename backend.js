@@ -23,6 +23,14 @@ const ZALO_CONFIG = {
     admin_user_id: process.env.ZALO_ADMIN_USER_ID
 };
 
+// Cấu hình Email (Gmail) - chỉ dùng nếu cần
+const EMAIL_CONFIG = {
+    service: 'gmail',
+    auth: {
+        user: process.env.EMAIL_USER || 'your-email@gmail.com',
+        pass: process.env.EMAIL_PASS || 'your-app-password'
+    }
+};
 
 // Tạo transporter email
 const transporter = nodemailer.createTransport(EMAIL_CONFIG);
