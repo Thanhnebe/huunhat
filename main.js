@@ -286,7 +286,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // Function gửi thông tin đăng ký tư vấn
-function sendToZalo(event) {
+async function sendToZalo(event) {
     event.preventDefault();
 
     const form = document.getElementById('zaloForm');
@@ -312,8 +312,34 @@ function sendToZalo(event) {
         area: area
     };
 
-    // Tạo tin nhắn cho Zalo OA
-    const message = `🔔 ĐĂNG KÝ TƯ VẤN MỚI
+    // Gửi dữ liệu đến serverless function
+    const apiUrl = window.location.hostname === 'localhost'
+        ? 'http://localhost:3000/api/zalo-register'
+        : '/api/zalo-register';
+
+    try {
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            // Thành công - tin nhắn đã được gửi tự động
+            showSuccessMessage('Đăng ký thành công! Chúng tôi sẽ liên hệ với bạn sớm nhất.');
+            form.reset();
+        } else {
+            // Lỗi từ server
+            showErrorMessage(result.error || 'Có lỗi xảy ra, vui lòng thử lại.');
+        }
+    } catch (error) {
+        console.error('Lỗi kết nối:', error);
+        // Fallback: Mở Zalo OA nếu không kết nối được server
+        const message = `🔔 ĐĂNG KÝ TƯ VẤN MỚI
 
 👤 Họ và tên: ${name}
 📧 Email: ${email}
@@ -324,23 +350,17 @@ function sendToZalo(event) {
 
 ⏰ Thời gian: ${new Date().toLocaleString('vi-VN')}`;
 
-    // Mã hóa tin nhắn
-    const encodedMessage = encodeURIComponent(message);
+        const encodedMessage = encodeURIComponent(message);
+        const zaloOAUrl = 'https://zalo.me/3416749500273400315';
+        const fullUrl = `${zaloOAUrl}?text=${encodedMessage}`;
 
-    // URL Zalo OA của bạn
-    const zaloOAUrl = 'https://zalo.me/3416749500273400315';
-    const fullUrl = `${zaloOAUrl}?text=${encodedMessage}`;
+        showSuccessMessage('Đăng ký thành công! Đang mở Zalo để gửi thông tin...');
+        setTimeout(() => {
+            window.open(fullUrl, '_blank');
+        }, 1000);
 
-    // Hiển thị thông báo thành công
-    showSuccessMessage('Đăng ký thành công! Đang mở Zalo để gửi thông tin...');
-
-    // Mở Zalo OA với tin nhắn đã điền sẵn
-    setTimeout(() => {
-        window.open(fullUrl, '_blank');
-    }, 1000);
-
-    // Reset form
-    form.reset();
+        form.reset();
+    }
 
     // Khôi phục nút submit
     submitBtn.innerHTML = originalText;
