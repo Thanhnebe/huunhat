@@ -6,19 +6,10 @@
             "use": "@vercel/node"
         }
     ],
-    "routes": [
+    "rewrites": [
         {
-            "src": "/api/(.*)",
-            "dest": "/backend.js"
-        },
-        {
-            "src": "/(.*)",
-            "dest": "/$1"
+            "source": "/api/(.*)",
+            "destination": "/backend.js"
         }
-    ],
-    "functions": {
-        "backend.js": {
-            "maxDuration": 30
-        }
-    }
+    ]
 }

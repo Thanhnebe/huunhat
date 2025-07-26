@@ -177,9 +177,15 @@ app.get('/api/health', (req, res) => {
     });
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`🚀 Server đang chạy trên port ${PORT}`);
-    console.log(`📧 Email: ${EMAIL_CONFIG.auth.user !== 'your-email@gmail.com' ? 'Đã cấu hình' : 'Chưa cấu hình'}`);
-    console.log(`💬 Zalo: ${ZALO_CONFIG.access_token !== 'YOUR_OA_ACCESS_TOKEN' ? 'Đã cấu hình' : 'Chưa cấu hình'}`);
-});
+// Export app cho Vercel serverless
+module.exports = app;
+
+// Chỉ chạy server khi không phải Vercel
+if (process.env.NODE_ENV !== 'production') {
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+        console.log(`🚀 Server đang chạy trên port ${PORT}`);
+        console.log(`📧 Email: ${EMAIL_CONFIG.auth.user !== 'your-email@gmail.com' ? 'Đã cấu hình' : 'Chưa cấu hình'}`);
+        console.log(`💬 Zalo: ${ZALO_CONFIG.access_token !== 'YOUR_OA_ACCESS_TOKEN' ? 'Đã cấu hình' : 'Chưa cấu hình'}`);
+    });
+}
