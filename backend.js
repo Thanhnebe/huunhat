@@ -16,21 +16,13 @@ app.use('/js', express.static('js'));
 
 // Cấu hình Zalo OA
 const ZALO_CONFIG = {
-    app_id: process.env.ZALO_APP_ID || '3635930658555273743',
-    app_secret: process.env.ZALO_APP_SECRET || 'YOUR_APP_SECRET',
-    oa_id: process.env.ZALO_OA_ID || '3416749500273400315',
-    access_token: process.env.ZALO_ACCESS_TOKEN || 'YOUR_OA_ACCESS_TOKEN',
-    admin_user_id: process.env.ZALO_ADMIN_USER_ID || 'USER_ID_ADMIN'
+    app_id: process.env.ZALO_APP_ID,
+    app_secret: process.env.ZALO_APP_SECRET,
+    oa_id: process.env.ZALO_OA_ID,
+    access_token: process.env.ZALO_ACCESS_TOKEN,
+    admin_user_id: process.env.ZALO_ADMIN_USER_ID
 };
 
-// Cấu hình Email (Gmail)
-const EMAIL_CONFIG = {
-    service: 'gmail',
-    auth: {
-        user: process.env.EMAIL_USER || 'your-email@gmail.com',
-        pass: process.env.EMAIL_PASS || 'your-app-password'
-    }
-};
 
 // Tạo transporter email
 const transporter = nodemailer.createTransport(EMAIL_CONFIG);
@@ -91,21 +83,6 @@ app.post('/api/zalo-register', async (req, res) => {
             }
         }
 
-        // Gửi email thông báo
-        if (EMAIL_CONFIG.auth.user !== 'your-email@gmail.com') {
-            try {
-                await transporter.sendMail({
-                    from: EMAIL_CONFIG.auth.user,
-                    to: EMAIL_CONFIG.auth.user, // Gửi cho chính mình
-                    subject: emailSubject,
-                    html: emailContent
-                });
-                console.log('✅ Gửi email thông báo thành công');
-            } catch (emailError) {
-                console.log('❌ Lỗi gửi email:', emailError.message);
-            }
-        }
-
         res.json({
             success: true,
             message: 'Đăng ký thành công! Chúng tôi sẽ liên hệ với bạn sớm nhất.',
@@ -159,7 +136,7 @@ app.post('/api/zalo/token', async (req, res) => {
     try {
         const response = await axios.post('https://oauth.zaloapp.com/v4/access_token', {
             app_id: '3635930658555273743', // App ID của bạn
-            app_secret: 'YOUR_APP_SECRET', // App Secret của bạn
+            app_secret: ZALO_CONFIG.app_secret, // App Secret của bạn
             code: code,
             grant_type: 'authorization_code'
         });
@@ -182,8 +159,7 @@ app.get('/api/health', (req, res) => {
         status: 'OK',
         timestamp: new Date().toISOString(),
         services: {
-            zalo: ZALO_CONFIG.access_token !== 'YOUR_OA_ACCESS_TOKEN',
-            email: EMAIL_CONFIG.auth.user !== 'your-email@gmail.com'
+            zalo: ZALO_CONFIG.access_token !== 'YOUR_OA_ACCESS_TOKEN'
         }
     });
 });
